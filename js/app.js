@@ -1,18 +1,12 @@
-/*-------------------------------- Constants --------------------------------*/
+/*--------- Constants -----------------*/
 
+/*------------ Variables (state) ----- */
+let board, turn, winner;
 
+/*---------- Cached Element References ------------*/
+const sqaureEls = document.querySelectorAll("section > div");
+const messageEl = document.querySelector("#message");
 
-/*---------------------------- Variables (state) ----------------------------*/
+/*--------------- Event Listeners --------*/
 
-
-
-/*------------------------ Cached Element References ------------------------*/
-
-
-
-/*----------------------------- Event Listeners -----------------------------*/
-
-
-
-/*-------------------------------- Functions --------------------------------*/
-
+/*------------------- Functions ------------------*/
