@@ -19,6 +19,8 @@ const messageEl = document.getElementById("message");
 console.log(sqaureEls);
 
 /*--------------- Event Listeners --------*/
+document.querySelector(".board").addEventListener("click", handleClick);
+document.getElementById("reset").addEventListener("click", init);
 
 /*------------------- Functions ------------------*/
 init();
@@ -57,4 +59,51 @@ function render() {
       messageEl.textContent = `It's Player ${playerTurn}'s turn!`;
       break;
   }
+}
+
+function handleClick(e) {
+  const clickedIndex = parseInt(e.target.id[2]);
+
+  if (clickedIndex === NaN) {
+    return;
+  }
+
+  if (board[clickedIndex]) {
+    return;
+  }
+
+  if (winner) {
+    return;
+  }
+
+  board[clickedIndex] = turn;
+  turn *= -1;
+
+  winner = getWinner();
+
+  render();
+}
+
+function getWinner() {
+  const comboValues = winningCombos.map(
+    (combo) => board[combo[0]] + board[combo[1]] + board[combo[2]]
+  );
+
+  let winningCombo = null;
+
+  comboValues.forEach((value) => {
+    if (value && value % 3 === 0) {
+      winningCombo = value > 0 ? 1 : -1;
+    }
+  });
+
+  if (winningCombo) {
+    return winningCombo;
+  }
+
+  if (!board.some((square) => square === null)) {
+    return "T";
+  }
+
+  return null;
 }
