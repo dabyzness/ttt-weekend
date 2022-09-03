@@ -59,7 +59,21 @@ export default class Game {
    * null --> Game is ongoing
    */
   hasWinner() {
-    const comboValues = winningCombos.map((combo) => {
+    const comboValues = this.getComboValues();
+
+    if (comboValues.includes(Math.abs(3))) {
+      return comboValues.find((value) => value === Math.abs(3)) > 0 ? 1 : -1;
+    }
+
+    if (!this.game.some((board) => board.getWinner() === null)) {
+      return "T";
+    }
+
+    return null;
+  }
+
+  getComboValues() {
+    return winningCombos.map((combo) => {
       let value = 0;
 
       combo.forEach((index) => {
@@ -71,15 +85,5 @@ export default class Game {
 
       return value;
     });
-
-    if (comboValues.includes(Math.abs(3))) {
-      return comboValues.find((value) => value === Math.abs(3)) > 0 ? 1 : -1;
-    }
-
-    if (!this.game.some((board) => board.getWinner() === null)) {
-      return "T";
-    }
-
-    return null;
   }
 }

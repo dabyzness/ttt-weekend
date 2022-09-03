@@ -1,12 +1,35 @@
 import Game from "./methods/Game.js";
 
 /*--------- Constants -----------------*/
+const winningCombos = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
+const boardName = [
+  "top-left",
+  "top-center",
+  "top-right",
+  "center-left",
+  "center",
+  "center-right",
+  "bottom-left",
+  "bottom-center",
+  "bottom-right",
+];
 
 /*------------ Variables (state) ----- */
 let game, turn;
 
 /*---------- Cached Element References ------------*/
 const gameEl = document.querySelector(".game");
+const messageEl = document.getElementById("message");
 let boardEls;
 
 /*--------------- Event Listeners --------*/
@@ -82,6 +105,7 @@ function init() {
  * Initial render of the game board
  */
 function renderInit() {
+  messageEl.textContent = "Player 1, place an X anywhere on the board!";
   game
     .getGame()
     .map((board, i) => {
@@ -157,6 +181,19 @@ function render() {
       });
     }
   });
+
+  let player = turn === 1 ? 1 : 2;
+  if (!game.getWinner()) {
+    if (game.getCurrentBoard() === null) {
+      messageEl.textContent = `Player ${player}, make your move anywhere on the board`;
+    } else {
+      messageEl.textContent = `Player ${player}, make your move on the ${
+        boardName[game.getCurrentBoard()]
+      } Board`;
+    }
+  } else {
+    renderWinner();
+  }
 }
 
 /**
@@ -187,4 +224,35 @@ function isSquareTaken(boardIndex, squareIndex) {
 function setWinners(boardIndex) {
   game.getGame()[boardIndex].setWinner();
   game.setWinner();
+}
+
+function renderWinner() {
+  switch (game.getWinner()) {
+    case 1:
+      messageEl.textContent = "Player 1 Won!";
+      break;
+    case -1:
+      messageEl.textContent = "Player 2 Won!";
+      break;
+    case "T":
+      messageEl.textContent = "It's a Tie!";
+      break;
+    default:
+      break;
+  }
+
+  game
+    .getComboValues()
+    .reduce((prev, value, i) => {
+      Math.abs(value) === 3 ? prev.push(winningCombos[i]) : null;
+      return prev;
+    }, [])
+    .flat()
+    .forEach((index) => {
+      boardEls[index].classList.add("winning-combo");
+    });
+
+  boardEls.forEach((boardEl) => {
+    boardEl.classList.remove("playable");
+  });
 }

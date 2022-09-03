@@ -60,3 +60,7 @@ span {
   font-stretch: condensed;
   font-size: 22vmin;
 }
+
+.winning-combo {
+  background-color: green;
+}
