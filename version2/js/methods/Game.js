@@ -72,8 +72,6 @@ export default class Game {
       return value;
     });
 
-    console.log(comboValues);
-
     if (comboValues.includes(Math.abs(3))) {
       return comboValues.find((value) => value === Math.abs(3)) > 0 ? 1 : -1;
     }

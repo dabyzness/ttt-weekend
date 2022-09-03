@@ -96,9 +96,39 @@ function renderInit() {
   console.log(boardEls);
 }
 
+/**
+ * Render content onto the page based on game state
+ */
 function render() {
-  boardEls.forEach((board) => {
-    console.log(board.childNodes);
+  boardEls.forEach((board, i) => {
+    // If there is a winner at the current board, only display winner of that board
+    switch (game.getGame()[i].getWinner()) {
+      case 1:
+        board.innerHTML = "X";
+        break;
+      case -1:
+        board.innerHTML = "O";
+        break;
+      case "T":
+        board.innerHTML = "TIE";
+        break;
+      default:
+        break;
+    }
+
+    board.childNodes.forEach((square, j) => {
+      // Display what is placed in each square
+      switch (game.getGame()[i].getBoard()[j].getValue()) {
+        case 1:
+          square.textContent = "X";
+          break;
+        case -1:
+          square.textContent = "O";
+          break;
+        default:
+          break;
+      }
+    });
   });
 }
 
@@ -128,7 +158,6 @@ function isSquareTaken(boardIndex, squareIndex) {
  * @param {number} boardIndex
  */
 function setWinners(boardIndex) {
-  game.setWinner();
   game.getGame()[boardIndex].setWinner();
-  console.log(game.getWinner());
+  game.setWinner();
 }
