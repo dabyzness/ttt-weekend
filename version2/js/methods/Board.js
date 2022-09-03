@@ -57,8 +57,6 @@ export default class Board {
         this.board[combo[2]].getValue()
     );
 
-    console.log(comboValues);
-
     // If there is a winner (value is either 3 or -3), return a winner
     if (comboValues.some((value) => Math.abs(value) === 3)) {
       return comboValues.find((value) => Math.abs(value) === 3) > 0 ? 1 : -1;

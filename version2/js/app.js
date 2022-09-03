@@ -34,6 +34,13 @@ function handleClick(e) {
     return;
   }
 
+  if (game.getCurrentBoard() !== null) {
+    if (boardIndex !== game.getCurrentBoard()) {
+      console.log("CAN'T CHOOSE THIS BOARD");
+      return;
+    }
+  }
+
   if (doesBoardHaveWinner(boardIndex)) {
     console.log("BOARD HAS WINNER");
     return;
@@ -48,6 +55,11 @@ function handleClick(e) {
   game.setGame(boardIndex, squareIndex, turn);
   setWinners(boardIndex);
   turn *= -1;
+
+  // Set next board that you can play:
+  doesBoardHaveWinner(squareIndex)
+    ? game.setCurrentBoard(null)
+    : game.setCurrentBoard(squareIndex);
 
   // Renders any changes made in state variable
   render();
