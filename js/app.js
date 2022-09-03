@@ -64,7 +64,7 @@ function render() {
 function handleClick(e) {
   const clickedIndex = parseInt(e.target.id[2]);
 
-  if (clickedIndex === NaN) {
+  if (!clickedIndex && clickedIndex != 0) {
     return;
   }
 
@@ -92,7 +92,7 @@ function getWinner() {
   let winningCombo = null;
 
   comboValues.forEach((value) => {
-    if (value && value % 3 === 0) {
+    if (Math.abs(value) - 3 === 0) {
       winningCombo = value > 0 ? 1 : -1;
     }
   });
