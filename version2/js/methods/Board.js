@@ -11,7 +11,7 @@ const winningCombos = [
   [2, 4, 6],
 ];
 
-class Board {
+export default class Board {
   constructor() {
     this.board = new Array(9).fill(new Square());
     this.winner = null;
