@@ -22,7 +22,6 @@ function handleClick(e) {
     ? parseInt(e.target.parentNode.id[2])
     : parseInt(e.target.id[2]);
   const squareIndex = parseInt(e.target.className[2]);
-  console.log(e.target.parentNode.className);
 
   // Checks if legal clicks, else returns
   if (boardIndex === null || squareIndex === null) {
