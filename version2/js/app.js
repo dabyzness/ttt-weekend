@@ -9,6 +9,7 @@ let game;
 const gameEl = document.querySelector(".game");
 
 /*--------------- Event Listeners --------*/
+gameEl.addEventListener("click", handleClick);
 
 /*------------------- Functions ------------------*/
 
@@ -49,4 +50,8 @@ function renderInit() {
     .forEach((boardEl) => {
       gameEl.appendChild(boardEl);
     });
+}
+
+function handleClick(e) {
+  console.log(e.target.parentNode.getAttribute("id"));
 }

@@ -31,8 +31,8 @@ export default class Board {
   }
 
   /* ------ Setters ------ */
-  setBoard(index, value) {
-    this.board[index].setValue(value);
+  setBoard(squareIndex, value) {
+    this.board[squareIndex].setValue(value);
   }
 
   setWinner() {}
@@ -44,7 +44,7 @@ export default class Board {
    * 1  ----> Player 1 wins
    * -1 ----> Player 2 wins
    * 'T' ---> Tie
-   * null --> Game is ongoing
+   * null --> Board is ongoing
    */
   hasWinner() {
     // Totals current values of legal combinations within board
