@@ -1,4 +1,4 @@
-import Board from "./methods/Board.js";
+import Game from "./methods/Game.js";
 
 /*--------- Constants -----------------*/
 
@@ -18,7 +18,7 @@ init();
 function init() {
   // clear out previous HTML element in the game section
   gameEl.innerHTML = "";
-  game = new Board();
+  game = new Game();
   renderInit();
 }
 
@@ -27,15 +27,26 @@ function init() {
  */
 function renderInit() {
   game
-    .getBoard()
-    .map((square, i) => {
-      const el = document.createElement("div");
-      el.setAttribute("class", `sq${i}`);
-      el.textContent = square.getValue();
+    .getGame()
+    .map((board, i) => {
+      const boardEl = document.createElement("div");
+      boardEl.setAttribute("class", "board");
+      boardEl.setAttribute("id", `bd${i}`);
 
-      return el;
+      board
+        .getBoard()
+        .map((square, j) => {
+          const squareEl = document.createElement("div");
+          squareEl.setAttribute("class", `sq${j}`);
+          squareEl.textContent = square.getValue();
+
+          return squareEl;
+        })
+        .forEach((squareEl) => boardEl.appendChild(squareEl));
+
+      return boardEl;
     })
-    .forEach((el) => {
-      gameEl.appendChild(el);
+    .forEach((boardEl) => {
+      gameEl.appendChild(boardEl);
     });
 }

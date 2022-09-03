@@ -9,11 +9,20 @@ body {
   flex-direction: column;
 }
 
-section.game {
+.game {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(3, auto);
+  gap: 0vmin;
+}
+
+.board {
   display: grid;
   grid-template-rows: repeat(3, 10vmin);
   grid-template-columns: repeat(3, 10vmin);
   grid-gap: 0vmin;
+  border: 1px solid black;
+  padding: 1rem;
 }
 
 .sq0,
