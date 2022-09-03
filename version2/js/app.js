@@ -3,13 +3,52 @@ import Game from "./methods/Game.js";
 /*--------- Constants -----------------*/
 
 /*------------ Variables (state) ----- */
-let game;
+let game, turn;
 
 /*---------- Cached Element References ------------*/
 const gameEl = document.querySelector(".game");
 
 /*--------------- Event Listeners --------*/
 gameEl.addEventListener("click", handleClick);
+
+/**
+ * Handles click event when trying to play a move
+ * @param {Event} e
+ */
+function handleClick(e) {
+  // Grabs the indices of square clicked and its parent board
+  const boardIndex = parseInt(e.target.parentNode.id[2]) || null;
+  const squareIndex = parseInt(e.target.className[2]) || null;
+
+  // Checks if legal clicks, else returns
+  if (boardIndex === null || squareIndex === null) {
+    console.log("CLICKED OUTSIDE OF AREA");
+    return;
+  }
+
+  if (game.getWinner()) {
+    console.log("GAME IS OVER");
+    return;
+  }
+
+  if (doesBoardHaveWinner(boardIndex)) {
+    console.log("BOARD HAS WINNER");
+    return;
+  }
+
+  if (isSquareTaken(boardIndex, squareIndex)) {
+    console.log("SQUARE TAKEN");
+    return;
+  }
+
+  // Updates game state
+  game.setGame(boardIndex, squareIndex, turn);
+  setWinners();
+  turn *= -1;
+
+  // Renders any changes made in state variable
+  render();
+}
 
 /*------------------- Functions ------------------*/
 
@@ -20,6 +59,7 @@ function init() {
   // clear out previous HTML element in the game section
   gameEl.innerHTML = "";
   game = new Game();
+  turn = 1;
   renderInit();
 }
 
@@ -52,6 +92,32 @@ function renderInit() {
     });
 }
 
-function handleClick(e) {
-  console.log(e.target.parentNode.getAttribute("id"));
+/**
+ * Checks if the board has a winner
+ * @param {number} boardIndex
+ * @returns boolean
+ */
+function doesBoardHaveWinner(boardIndex) {
+  return game.getGame()[boardIndex].getWinner() ? true : false;
+}
+
+/**
+ * checks if the square clicked has a value
+ * @param {number} boardIndex
+ * @param {number} squareIndex
+ * @returns boolean
+ */
+function isSquareTaken(boardIndex, squareIndex) {
+  return game.getGame()[boardIndex].getBoard()[squareIndex].getValue()
+    ? true
+    : false;
+}
+
+/**
+ * Sets the winner property on both board and game
+ * @param {number} boardIndex
+ */
+function setWinners(boardIndex) {
+  game.setWinner();
+  game.getGame()[boardIndex].setWinner();
 }
