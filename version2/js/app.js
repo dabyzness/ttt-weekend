@@ -87,6 +87,7 @@ function renderInit() {
     .map((board, i) => {
       const boardEl = document.createElement("div");
       boardEl.setAttribute("class", "board");
+      boardEl.classList.add("playable");
       boardEl.setAttribute("id", `bd${i}`);
 
       board
@@ -114,18 +115,26 @@ function renderInit() {
  */
 function render() {
   boardEls.forEach((board, i) => {
+    if (game.getCurrentBoard() === null) {
+      !game.getGame()[i].getWinner() ? board.classList.add("playable") : null;
+    } else if (game.getCurrentBoard() === i) {
+      board.classList.add("playable");
+    } else {
+      board.classList.remove("playable");
+    }
+
     // If there is a winner at the current board, only display winner of that board
     switch (game.getGame()[i].getWinner()) {
       case 1:
-        board.setAttribute("class", "board complete");
+        board.classList.add("complete");
         board.innerHTML = "<span>X</span>";
         break;
       case -1:
-        board.setAttribute("class", "board complete");
+        board.classList.add("complete");
         board.innerHTML = "<span>O</span>";
         break;
       case "T":
-        board.setAttribute("class", "board complete");
+        board.classList.add("complete");
         board.innerHTML = "<span>T</span>";
         break;
       default:

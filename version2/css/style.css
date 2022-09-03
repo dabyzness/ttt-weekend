@@ -52,6 +52,10 @@ body {
   width: calc(27vmin + 2rem);
 }
 
+.playable {
+  background-color: yellow;
+}
+
 span {
   font-stretch: condensed;
   font-size: 22vmin;
