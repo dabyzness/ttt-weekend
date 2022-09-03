@@ -27,7 +27,7 @@ export default class Board {
   }
 
   getWinner() {
-    this.winner;
+    return this.winner;
   }
 
   /* ------ Setters ------ */
@@ -35,7 +35,9 @@ export default class Board {
     this.board[squareIndex].setValue(value);
   }
 
-  setWinner() {}
+  setWinner() {
+    this.winner = this.hasWinner();
+  }
 
   /* ------ Methods ------ */
   /**
@@ -61,7 +63,7 @@ export default class Board {
     }
 
     // If board is full and there is no winner, return a tie
-    if (!this.board.includes(null)) {
+    if (!this.board.some((square) => square.getValue() === null)) {
       return "T";
     }
 

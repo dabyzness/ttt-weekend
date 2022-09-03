@@ -7,6 +7,7 @@ let game, turn;
 
 /*---------- Cached Element References ------------*/
 const gameEl = document.querySelector(".game");
+let boardEls;
 
 /*--------------- Event Listeners --------*/
 gameEl.addEventListener("click", handleClick);
@@ -43,7 +44,7 @@ function handleClick(e) {
 
   // Updates game state
   game.setGame(boardIndex, squareIndex, turn);
-  setWinners();
+  setWinners(boardIndex);
   turn *= -1;
 
   // Renders any changes made in state variable
@@ -90,6 +91,15 @@ function renderInit() {
     .forEach((boardEl) => {
       gameEl.appendChild(boardEl);
     });
+
+  boardEls = document.querySelectorAll(".board");
+  console.log(boardEls);
+}
+
+function render() {
+  boardEls.forEach((board) => {
+    console.log(board.childNodes);
+  });
 }
 
 /**
@@ -120,4 +130,5 @@ function isSquareTaken(boardIndex, squareIndex) {
 function setWinners(boardIndex) {
   game.setWinner();
   game.getGame()[boardIndex].setWinner();
+  console.log(game.getWinner());
 }

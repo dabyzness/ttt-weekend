@@ -38,11 +38,11 @@ export default class Game {
 
   /* ------ Setters ------ */
   setGame(boardIndex, squareIndex, value) {
-    this.board[boardIndex].setBoard(squareIndex, value);
+    this.game[boardIndex].setBoard(squareIndex, value);
   }
 
   setWinner() {
-    this.winner = hasWinner();
+    this.winner = this.hasWinner();
   }
 
   setCurrentBoard(boardIndex) {
@@ -63,11 +63,16 @@ export default class Game {
       let value = 0;
 
       combo.forEach((index) => {
-        value += game[index].getWinner() === "T" ? 0 : game[index].getWinner();
+        value +=
+          this.game[index].getWinner() === "T"
+            ? 0
+            : this.game[index].getWinner();
       });
 
       return value;
     });
+
+    console.log(comboValues);
 
     if (comboValues.includes(Math.abs(3))) {
       return comboValues.find((value) => value === Math.abs(3)) > 0 ? 1 : -1;
