@@ -18,8 +18,13 @@ gameEl.addEventListener("click", handleClick);
  */
 function handleClick(e) {
   // Grabs the indices of square clicked and its parent board
-  const boardIndex = parseInt(e.target.parentNode.id[2]) || null;
-  const squareIndex = parseInt(e.target.className[2]) || null;
+  const boardIndex =
+    e.target.parentNode.className === "board"
+      ? parseInt(e.target.parentNode.id[2])
+      : parseInt(e.target.id[2]);
+  const squareIndex = parseInt(e.target.className[2]);
+
+  console.log(e);
 
   // Checks if legal clicks, else returns
   if (boardIndex === null || squareIndex === null) {
@@ -93,7 +98,6 @@ function renderInit() {
     });
 
   boardEls = document.querySelectorAll(".board");
-  console.log(boardEls);
 }
 
 /**
@@ -110,25 +114,27 @@ function render() {
         board.innerHTML = "O";
         break;
       case "T":
-        board.innerHTML = "TIE";
+        board.innerHTML = "T";
         break;
       default:
         break;
     }
 
-    board.childNodes.forEach((square, j) => {
-      // Display what is placed in each square
-      switch (game.getGame()[i].getBoard()[j].getValue()) {
-        case 1:
-          square.textContent = "X";
-          break;
-        case -1:
-          square.textContent = "O";
-          break;
-        default:
-          break;
-      }
-    });
+    if (board.children.length > 0) {
+      board.childNodes.forEach((square, j) => {
+        // Display what is placed in each square
+        switch (game.getGame()[i].getBoard()[j].getValue()) {
+          case 1:
+            square.textContent = "X";
+            break;
+          case -1:
+            square.textContent = "O";
+            break;
+          default:
+            break;
+        }
+      });
+    }
   });
 }
 
