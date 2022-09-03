@@ -108,19 +108,22 @@ function render() {
     // If there is a winner at the current board, only display winner of that board
     switch (game.getGame()[i].getWinner()) {
       case 1:
-        board.innerHTML = "X";
+        board.setAttribute("class", "board complete");
+        board.innerHTML = "<span>X</span>";
         break;
       case -1:
-        board.innerHTML = "O";
+        board.setAttribute("class", "board complete");
+        board.innerHTML = "<span>O</span>";
         break;
       case "T":
-        board.innerHTML = "T";
+        board.setAttribute("class", "board complete");
+        board.innerHTML = "<span>T</span>";
         break;
       default:
         break;
     }
 
-    if (board.children.length > 0) {
+    if (board.children.length > 1) {
       board.childNodes.forEach((square, j) => {
         // Display what is placed in each square
         switch (game.getGame()[i].getBoard()[j].getValue()) {
