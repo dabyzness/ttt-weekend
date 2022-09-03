@@ -13,8 +13,12 @@ const winningCombos = [
 
 export default class Board {
   constructor() {
-    this.board = new Array(9).fill(new Square());
+    this.board = [];
     this.winner = null;
+
+    for (let i = 0; i < 9; i += 1) {
+      this.board.push(new Square());
+    }
   }
 
   /* ------ Getters ------ */
