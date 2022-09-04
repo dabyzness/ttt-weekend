@@ -60,9 +60,10 @@ export default class Game {
    */
   hasWinner() {
     const comboValues = this.getComboValues();
+    console.log(comboValues);
 
-    if (comboValues.includes(Math.abs(3))) {
-      return comboValues.find((value) => value === Math.abs(3)) > 0 ? 1 : -1;
+    if (comboValues.some((value) => Math.abs(value) === 3)) {
+      return comboValues.find((value) => Math.abs(value) === 3) > 0 ? 1 : -1;
     }
 
     if (!this.game.some((board) => board.getWinner() === null)) {

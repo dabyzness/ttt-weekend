@@ -151,14 +151,17 @@ function render() {
     switch (game.getGame()[i].getWinner()) {
       case 1:
         board.classList.add("complete");
+        board.classList.remove("playable");
         board.innerHTML = "<span>X</span>";
         break;
       case -1:
         board.classList.add("complete");
+        board.classList.remove("playable");
         board.innerHTML = "<span>O</span>";
         break;
       case "T":
         board.classList.add("complete");
+        board.classList.remove("playable");
         board.innerHTML = "<span>T</span>";
         break;
       default:
@@ -227,6 +230,7 @@ function setWinners(boardIndex) {
 }
 
 function renderWinner() {
+  console.log(game.getWinner());
   switch (game.getWinner()) {
     case 1:
       messageEl.textContent = "Player 1 Won!";
