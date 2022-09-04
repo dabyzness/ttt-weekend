@@ -13,27 +13,29 @@ const winningCombos = [
 ];
 
 const boardName = [
-  "top-left",
-  "top-center",
-  "top-right",
-  "center-left",
-  "center",
-  "center-right",
-  "bottom-left",
-  "bottom-center",
-  "bottom-right",
+  "Top-Left",
+  "Top-Center",
+  "Top-Right",
+  "Center-Left",
+  "Center",
+  "Center-Right",
+  "Bottom-Left",
+  "Bottom-Center",
+  "Bottom-Right",
 ];
 
 /*------------ Variables (state) ----- */
 let game, turn;
 
 /*---------- Cached Element References ------------*/
+let boardEls;
 const gameEl = document.querySelector(".game");
 const messageEl = document.getElementById("message");
-let boardEls;
+const resetEl = document.getElementById("reset");
 
 /*--------------- Event Listeners --------*/
 gameEl.addEventListener("click", handleClick);
+resetEl.addEventListener("click", init);
 
 /**
  * Handles click event when trying to play a move
@@ -105,20 +107,20 @@ function init() {
  * Initial render of the game board
  */
 function renderInit() {
-  messageEl.textContent = "Player 1, place an X anywhere on the board!";
+  messageEl.innerHTML = "Player 1</br>Any Board";
+  resetEl.style.display = "none";
   game
     .getGame()
     .map((board, i) => {
       const boardEl = document.createElement("div");
-      boardEl.setAttribute("class", "board");
-      boardEl.classList.add("playable");
+      boardEl.setAttribute("class", "board playable");
       boardEl.setAttribute("id", `bd${i}`);
 
       board
         .getBoard()
         .map((square, j) => {
           const squareEl = document.createElement("div");
-          squareEl.setAttribute("class", `sq${j}`);
+          squareEl.setAttribute("class", `sq${j} square`);
           squareEl.textContent = square.getValue();
 
           return squareEl;
@@ -138,7 +140,10 @@ function renderInit() {
  * Render content onto the page based on game state
  */
 function render() {
+  resetEl.style.display = "block";
+
   boardEls.forEach((board, i) => {
+    board.classList.remove("playable");
     if (game.getCurrentBoard() === null) {
       !game.getGame()[i].getWinner() ? board.classList.add("playable") : null;
     } else if (game.getCurrentBoard() === i) {
@@ -188,9 +193,9 @@ function render() {
   let player = turn === 1 ? 1 : 2;
   if (!game.getWinner()) {
     if (game.getCurrentBoard() === null) {
-      messageEl.textContent = `Player ${player}, make your move anywhere on the board`;
+      messageEl.innherHTML = `Player ${player}</br>Anywhere`;
     } else {
-      messageEl.textContent = `Player ${player}, make your move on the ${
+      messageEl.innerHTML = `Player ${player}</br>${
         boardName[game.getCurrentBoard()]
       } Board`;
     }

@@ -1,5 +1,6 @@
 body {
-  background-color: gray;
+  background-color: #ede0d4;
+  color: #9c6644;
   /* Use a system font, if none are available use an available sans-sarif   font */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -9,22 +10,32 @@ body {
   flex-direction: column;
 }
 
+h2 {
+  /* margin-top: 25vh; */
+  text-align: center;
+  /* font-size: 5vh; */
+}
+
 .game {
   display: grid;
-  grid-template-rows: repeat(3, auto);
-  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, calc(9rem + 2rem));
+  grid-template-columns: repeat(3, calc(9rem + 2rem));
   gap: 0vmin;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .board {
   display: grid;
-  grid-template-rows: repeat(3, 9vmin);
-  grid-template-columns: repeat(3, 9vmin);
+  grid-template-rows: repeat(3, 3rem);
+  grid-template-columns: repeat(3, 3rem);
   grid-gap: 0vmin;
-  border: 1px solid black;
+  border: 1px solid #b08968;
   padding: 1rem;
   text-align: center;
+}
+
+.square {
+  font-size: 2rem;
 }
 
 .sq0,
@@ -33,7 +44,7 @@ body {
 .sq4,
 .sq6,
 .sq7 {
-  border-right: 2px solid black;
+  border-right: 2px solid #7f5539;
 }
 
 .sq0,
@@ -42,25 +53,44 @@ body {
 .sq3,
 .sq4,
 .sq5 {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #7f5539;
 }
 
 .complete {
   display: block;
   padding: 0;
-  height: calc(27vmin + 2rem);
-  width: calc(27vmin + 2rem);
+  /* height: calc(9rem + 2rem); */
+  /* width: calc(9rem + 2rem); */
 }
 
 .playable {
-  background-color: yellow;
+  /* background-color: yellow; */
+  box-shadow: 0 0 0 0 rgba(127, 85, 57, 1);
+  /* transform: scale(1); */
+  animation: pulse 1.5s infinite;
 }
 
 span {
-  font-stretch: condensed;
-  font-size: 22vmin;
+  font-size: 7.5rem;
 }
 
 .winning-combo {
-  background-color: green;
+  background-color: #ddb892;
+}
+
+@keyframes pulse {
+  0% {
+    /* transform: scale(0.95); */
+    box-shadow: 0 0 0 0 rgba(127, 85, 57, 0.7);
+  }
+
+  70% {
+    /* transform: scale(1); */
+    box-shadow: 0 0 0 10px rgba(127, 85, 57, 0);
+  }
+
+  100% {
+    /* transform: scale(0.95); */
+    box-shadow: 0 0 0 0 rgba(127, 85, 57, 0);
+  }
 }
