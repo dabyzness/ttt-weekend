@@ -5,16 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/ticTacToe.css" />
+    <!-- <link rel="stylesheet" href="./css/button.css" /> -->
 
     <script defer type="module" src="./js/app.js"></script>
-    <title>Document</title>
+    <title>Tic-Tac</title>
   </head>
   <body>
-    <h2 id="message"></h2>
-    <button id="pro">PRO</button>
-    <section class="game"></section>
-    <a href="./html/ticTacPro.html">Pro</a>
-    <a href="./html/ticTacToe.html">Toe</a>
-    <button id="reset" hidden>Reset</button>
+    <section class="board">
+      <div class="sq0 square">T</div>
+      <div class="sq1 square">I</div>
+      <div class="sq2 square">C</div>
+      <div class="sq3 square"></div>
+      <div class="sq4 square">A</div>
+      <div class="sq5 square"></div>
+      <div class="sq6 square"></div>
+      <div class="sq7 square"></div>
+      <div class="sq8 square">C</div>
+    </section>
+    <div class="button-holder" display="flex">
+      <form action="./html/ticTacToe.html">
+        <button type="submit">TOE</button>
+      </form>
+
+      <form action="./html/ticTacPro.html">
+        <button type="submit">PRO</button>
+      </form>
+    </div>
   </body>
 </html>

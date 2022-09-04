@@ -140,7 +140,7 @@ function renderInit() {
  * Render content onto the page based on game state
  */
 function render() {
-  resetEl.style.display = "block";
+  resetEl.style.display = "inline-block";
 
   boardEls.forEach((board, i) => {
     board.classList.remove("playable");

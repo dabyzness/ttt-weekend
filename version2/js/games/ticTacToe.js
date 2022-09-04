@@ -14,6 +14,7 @@ const resetEl = document.getElementById("reset");
 
 /*--------------- Event Listeners --------*/
 boardEl.addEventListener("click", handleClick);
+resetEl.addEventListener("click", init);
 
 function handleClick(e) {
   const clickedIndex = parseInt(e.target.className[2]);
@@ -69,7 +70,7 @@ function renderInit() {
 }
 
 function render() {
-  resetEl.style.display = "block";
+  resetEl.style.display = "inline-block";
 
   switch (game.getWinner()) {
     case 1:

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/ticTacToe.css" />
     <script defer type="module" src="../js/games/ticTacToe.js"></script>
     <title>Tic-Tac-Toe</title>
@@ -11,7 +12,11 @@
   <body>
     <h2 id="message"></h2>
     <section class="board"></section>
-    <button id="reset" hidden>Reset</button>
-    <a href="../index.html" class="button">Go back</a>
+    <div class="button-holder">
+      <button id="reset" hidden>Reset</button>
+      <form action="../index.html">
+        <button type="submit">Go Back</button>
+      </form>
+    </div>
   </body>
 </html>
