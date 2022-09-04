@@ -125,19 +125,19 @@ function render() {
 }
 
 function opponentMove() {
-  // setTimeout(() => {
-  const newBoard = game
-    .getBoard()
-    .filter((square) => square.getValue() === null);
+  setTimeout(() => {
+    const newBoard = game
+      .getBoard()
+      .filter((square) => square.getValue() === null);
 
-  const randomInt = Math.floor(Math.random() * newBoard.length);
+    const randomInt = Math.floor(Math.random() * newBoard.length);
 
-  newBoard[randomInt].setValue(turn);
+    newBoard[randomInt].setValue(turn);
 
-  turn *= -1;
-  game.setWinner();
-  render();
-  // }, 5000);
+    turn *= -1;
+    game.setWinner();
+    render();
+  }, 5000);
 }
 
 function checkIfPossibleWin(squareIndex) {
