@@ -144,29 +144,24 @@ function render() {
 
   boardEls.forEach((board, i) => {
     board.classList.remove("playable");
+
     if (game.getCurrentBoard() === null) {
       !game.getGame()[i].getWinner() ? board.classList.add("playable") : null;
     } else if (game.getCurrentBoard() === i) {
       board.classList.add("playable");
-    } else {
-      board.classList.remove("playable");
     }
-
     // If there is a winner at the current board, only display winner of that board
     switch (game.getGame()[i].getWinner()) {
       case 1:
         board.classList.add("complete");
-        board.classList.remove("playable");
         board.innerHTML = "<span>X</span>";
         break;
       case -1:
         board.classList.add("complete");
-        board.classList.remove("playable");
         board.innerHTML = "<span>O</span>";
         break;
       case "T":
         board.classList.add("complete");
-        board.classList.remove("playable");
         board.innerHTML = "<span>T</span>";
         break;
       default:
@@ -190,11 +185,14 @@ function render() {
     }
   });
 
-  let player = turn === 1 ? 1 : 2;
+  let player = turn === 1 ? "X" : "O";
   if (!game.getWinner()) {
+    console.log(game.getCurrentBoard());
     if (game.getCurrentBoard() === null) {
-      messageEl.innherHTML = `Player ${player}</br>Anywhere`;
+      console.log("IT HIT");
+      messageEl.innerHTML = `Player ${player}</br>Anywhere`;
     } else {
+      console.log("IT ALSO HIT");
       messageEl.innerHTML = `Player ${player}</br>${
         boardName[game.getCurrentBoard()]
       } Board`;
