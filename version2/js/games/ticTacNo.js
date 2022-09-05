@@ -23,6 +23,7 @@ const boardEl = document.querySelector(".board");
 const squareEls = document.querySelectorAll(".square");
 const resetEl = document.getElementById("reset");
 let notThisOne;
+const sound = document.getElementById("sound");
 
 /*--------------- Event Listeners --------*/
 boardEl.addEventListener("click", handleClick);
@@ -229,6 +230,8 @@ function nope() {
       notThisOne.textContent = "FINE, I'M LEAVING!";
       break;
     default:
+      sound.currentTime = 0;
+      sound.play();
       notThisOne.style.background = `rgb(${color1}, ${color2}, ${color3})`;
       const interval1 =
         Math.random() > 0.5
